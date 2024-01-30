@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "bill-reminder"
+version = "0.1.0"
+description = ""
+authors = ["Harry Tran"]
+readme = "README.md"
+packages = [{include = "bill_reminder"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+llama-index = "^0.9.39"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
