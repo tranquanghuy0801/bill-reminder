@@ -51,10 +51,9 @@ provider:
           Action:
             - "s3:GetObject"
             - "s3:PutObject"
-            - "s3:PutObjectAcl"
             - "s3:DeleteObject"
           Resource:
-            - "arn:aws:s3:::${BUCKET_NAME}/*"
+            - "arn:aws:s3:::${env:BUCKET_NAME}/*"
 
 package:
   patterns:
@@ -92,7 +91,8 @@ functions:
     image: 
       name: fetch_bill_image
     events:
-      - schedule: rate(1 hour)
+      - schedule: rate(30 days)
+    maximumRetryAttempts: 2
   processBill:
     description: "Process bill pdf and create IOS reminder"
     image:
@@ -104,7 +104,8 @@ functions:
             source:
               - my.bill.query
             detail-type:
-              - TriggerProcessBill   
+              - TriggerProcessBill
+    maximumRetryAttempts: 2
 
 custom:
   pythonRequirements:
