@@ -1,16 +1,23 @@
-[tool.poetry]
-name = "bill-reminder"
+[project]
+name = "bill_reminder"
 version = "0.1.0"
 description = ""
-authors = ["Harry Tran"]
+authors = [
+    {name = "Harry Tran"}
+]
 readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "modal (>=0.72.9,<0.73.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "llama-index (>=0.12.10,<0.13.0)",
+    "google-api-python-client (>=2.158.0,<3.0.0)",
+    "google-auth-httplib2 (>=0.2.0,<0.3.0)",
+    "google-auth-oauthlib (>=1.2.1,<2.0.0)"
+]
 packages = [{include = "bill_reminder"}]
-
-[tool.poetry.dependencies]
-python = "^3.11"
-llama-index = "^0.9.39"
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,40 @@
+name: Scheduled Python Script
+
+on:
+  schedule:
+    - cron: '0 0 10 * *'  # Runs at 00:00 UTC on the 10th day of each month
+
+jobs:
+  send_bill_reminder:
+    runs-on: ubuntu-latest
+    env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+        GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        CREDENTIALS_JSON_FILE: ${{ secrets.CREDENTIALS_JSON_FILE }}
+        ENVIRONMENT: "production"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12" # Specify the Python version you need
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install dependencies
+        run: |
+          # Add Poetry to PATH
+          export PATH="$HOME/.local/bin:$PATH"
+          poetry install
+
+      - name: Run Python script
+        run: |
+          # Add Poetry to PATH
+          export PATH="$HOME/.local/bin:$PATH"
+          poetry run python bill_reminder/main.py

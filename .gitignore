@@ -24,3 +24,7 @@ node_modules/
 __pycache__/
 .venv/
 venv/
+
+pdfs/*
+credentials.json
+.DS_Store
